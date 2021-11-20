@@ -14,6 +14,11 @@ let isAlive = false;
 
 playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 
+function updateChips() {
+  player.chips -= 20;
+  playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+}
+
 function getRandomCard() {
   let randomNumber = Math.ceil(Math.random() * 13);
   if (randomNumber > 10) {
@@ -56,6 +61,7 @@ function startingGame() {
   cards = [firstCard, secondCard];
   sum = firstCard + secondCard;
   renderGame();
+  updateChips();
 }
 
 function addingNewCard() {
