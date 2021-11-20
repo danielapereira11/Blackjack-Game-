@@ -5,6 +5,7 @@ const sumEl = document.querySelector("#sum-el");
 const statementEl = document.querySelector("#statement-el");
 const playerEl = document.querySelector("#player-el");
 const moreChips = document.querySelector("#add-chips-btn");
+const winnings = document.querySelector("#winnings-btn");
 
 let statement = "";
 let player = { name: "Daniela", chips: 400 };
@@ -17,8 +18,13 @@ function addChips() {
   player.chips += 20;
   playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 }
-
 moreChips.addEventListener("click", addChips);
+
+function clearChips() {
+  player.chips = 0;
+  playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+}
+winnings.addEventListener("click", clearChips);
 
 playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 function updateChips() {
