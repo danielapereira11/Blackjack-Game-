@@ -5,9 +5,12 @@ const sumEl = document.querySelector("#sum-el");
 const statementEl = document.querySelector("#statement-el");
 const playerEl = document.querySelector("#player-el");
 
+let statement = "";
 let player = { name: "Daniela", chips: 400 };
 let cards = [];
 let sum = 0;
+let hasBlackJack = false;
+let isAlive = false;
 
 playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 
