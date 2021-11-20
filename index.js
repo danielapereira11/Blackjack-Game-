@@ -6,10 +6,7 @@ const statementEl = document.querySelector("#statement-el");
 const playerEl = document.querySelector("#player-el");
 
 let cards = [];
-let sum = "";
-
-cardEl.innerHTML = "Cards: " + cards + " ";
-sumEl.innerHTML = "Sum: " + sum + " ";
+let sum = 0;
 
 function generateStatement() {
   if (sum > 1 && sum < 21) {
@@ -24,4 +21,22 @@ function generateStatement() {
   }
 }
 
-generateStatement();
+function startingGame() {
+  cards[0] = Math.ceil(Math.random() * 10);
+  cards[1] = Math.ceil(Math.random() * 10);
+  sum = cards[0] + cards[1];
+  cardEl.innerHTML = "Cards: " + cards[0] + ", " + cards[1];
+  sumEl.innerHTML = "Sum: " + sum;
+  generateStatement();
+}
+
+function addingNewCard() {
+  cards[2] = Math.ceil(Math.random() * 10);
+  sum = cards[0] + cards[1] + cards[2];
+  cardEl.innerHTML = "Cards: " + cards[0] + ", " + cards[1] + ", " + cards[2];
+  sumEl.innerHTML = "Sum: " + sum;
+  generateStatement();
+}
+
+startBtn.addEventListener("click", startingGame);
+newCardBtn.addEventListener("click", addingNewCard);
