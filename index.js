@@ -14,34 +14,57 @@ let isAlive = false;
 
 playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 
-function generateStatement() {
-  if (sum > 1 && sum < 21) {
-    statementEl.innerHTML =
-      "You are still in the game! Do you want to draw a new card?";
-  } else if (sum > 21) {
-    statementEl.innerHTML = "You are OUT!";
-  } else if (sum === 21) {
-    statementEl.innerHTML = "Congratulations! You got BLACKJACK!";
+function getRandomCard() {
+  let randomNumber = Math.ceil(Math.random() * 13);
+  if (randomNumber > 10) {
+    return 10;
+  } else if (randomNumber === 1) {
+    return 11;
   } else {
-    statementEl.innerHTML = "Do you want to play a round?";
+    return randomNumber;
   }
 }
 
-function startingGame() {
-  cards[0] = Math.ceil(Math.random() * 10);
-  cards[1] = Math.ceil(Math.random() * 10);
-  sum = cards[0] + cards[1];
-  cardEl.innerHTML = "Cards: " + cards[0] + ", " + cards[1];
+function renderGame() {
+  cardEl.innerHTML = "Cards: ";
+  for (let i = 0; i < cards.length; i++) {
+    cardEl.innerHTML += cards[i] + " ";
+  }
+
   sumEl.innerHTML = "Sum: " + sum;
-  generateStatement();
+
+  if (sum > 1 && sum < 21) {
+    statement = "You are still in the game! Do you want to draw a new card?";
+    isAlive = true;
+  } else if (sum > 21) {
+    statement = "You are OUT!";
+    isAlive = false;
+  } else if (sum === 21) {
+    statement = "Congratulations! You got BLACKJACK!";
+    hasBlackJack = true;
+  } else {
+    statement = "Do you want to play a round?";
+    isAlive = false;
+  }
+  statementEl.innerHTML = statement;
+}
+
+function startingGame() {
+  isAlive = true;
+  let firstCard = getRandomCard();
+  let secondCard = getRandomCard();
+  cards = [firstCard, secondCard];
+  sum = firstCard + secondCard;
+  renderGame();
 }
 
 function addingNewCard() {
-  cards[2] = Math.ceil(Math.random() * 10);
-  sum = cards[0] + cards[1] + cards[2];
-  cardEl.innerHTML = "Cards: " + cards[0] + ", " + cards[1] + ", " + cards[2];
-  sumEl.innerHTML = "Sum: " + sum;
-  generateStatement();
+  if (isAlive === true && hasBlackJack === false) {
+    let card = getRandomCard();
+    cards.push(card);
+    sum += card;
+    renderGame();
+  }
 }
 
 startBtn.addEventListener("click", startingGame);
