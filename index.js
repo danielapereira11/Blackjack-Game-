@@ -4,6 +4,7 @@ const cardEl = document.querySelector("#card-el");
 const sumEl = document.querySelector("#sum-el");
 const statementEl = document.querySelector("#statement-el");
 const playerEl = document.querySelector("#player-el");
+const moreChips = document.querySelector("#add-chips-btn");
 
 let statement = "";
 let player = { name: "Daniela", chips: 400 };
@@ -12,8 +13,14 @@ let sum = 0;
 let hasBlackJack = false;
 let isAlive = false;
 
-playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+function addChips() {
+  player.chips += 20;
+  playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+}
 
+moreChips.addEventListener("click", addChips);
+
+playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
 function updateChips() {
   player.chips -= 20;
   playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
