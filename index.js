@@ -9,28 +9,28 @@ const winnings = document.querySelector("#winnings-btn");
 
 let statement = "";
 let player = { name: "Daniela", chips: 400 };
+let player = { name: "Daniela", chips: 0 };
 let cards = [];
 let sum = 0;
 let hasBlackJack = false;
 let isAlive = false;
+let hasChips = false;
 
 function addChips() {
   player.chips += 20;
   playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+  hasChips = true;
 }
 moreChips.addEventListener("click", addChips);
 
 function clearChips() {
   player.chips = 0;
   playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+  hasChips = false;
 }
 winnings.addEventListener("click", clearChips);
 
 playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
-function updateChips() {
-  player.chips -= 20;
-  playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
-}
 
 function getRandomCard() {
   let randomNumber = Math.ceil(Math.random() * 13);
@@ -69,14 +69,28 @@ function renderGame() {
   statementEl.innerHTML = statement;
 }
 
+function updateChipCount() {
+  player.chips -= 20;
+  playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
+}
+
 function startingGame() {
-  isAlive = true;
-  let firstCard = getRandomCard();
-  let secondCard = getRandomCard();
-  cards = [firstCard, secondCard];
-  sum = firstCard + secondCard;
-  renderGame();
-  updateChips();
+  if (player.chips > 0) {
+    hasChips = true;
+  } else {
+    hasChips = false;
+  }
+
+  if (hasChips === true) {
+    isAlive = true;
+    let firstCard = getRandomCard();
+    let secondCard = getRandomCard();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
+
+    renderGame();
+    updateChipCount();
+  }
 }
 
 function addingNewCard() {
