@@ -91,6 +91,7 @@ function startingGame() {
   }
 
   if (hasChips === true) {
+    hasBlackJack = false;
     isAlive = true;
     let firstCard = getRandomCard();
     let secondCard = getRandomCard();
