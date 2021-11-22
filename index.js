@@ -60,6 +60,8 @@ function renderGame() {
   } else if (sum === 21) {
     statement = "Congratulations! You got BLACKJACK!";
     hasBlackJack = true;
+    player.chips += 50;
+    playerEl.innerHTML = `${player.name}: ${player.chips}€ `;
   } else {
     statement = "Do you want to play a round?";
     isAlive = false;
