@@ -8,13 +8,22 @@ const moreChips = document.querySelector("#add-chips-btn");
 const winnings = document.querySelector("#winnings-btn");
 
 let statement = "";
-let player = { name: "Daniela", chips: 400 };
-let player = { name: "Daniela", chips: 0 };
+let player = {
+  name: "",
+  chips: 0,
+};
 let cards = [];
 let sum = 0;
 let hasBlackJack = false;
 let isAlive = false;
 let hasChips = false;
+let playerName = prompt("What is your name?");
+
+function greeting() {
+  alert(`Hello ${playerName}, welcome to the game!`);
+  player.name = playerName;
+}
+greeting();
 
 function addChips() {
   player.chips += 20;
